@@ -12,5 +12,7 @@
     <Folder Include="wwwroot\user\css\" />
     <Folder Include="wwwroot\user\js\" />
     <Folder Include="wwwroot\user\img\" />
+    <Folder Include="Views\Shared\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
 </Project>
