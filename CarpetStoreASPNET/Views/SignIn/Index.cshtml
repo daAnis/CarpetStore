@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Авторизация - Ковромир";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Links {
+    <link rel="stylesheet" type="text/css" href="~/user/css/style.css">
+    <script src="~/user/js/script_sign.js"></script>
+}
+
+<div class="row justify-content-md-center no-margin">
+    <div class="col-md-auto">
+        <div class="panel">
+            <h1>Авторизация</h1>
+            <form action="" method="POST" name="frm" id="frm" onsubmit="return frmSubmit()">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" placeholder="example@example.com"
+                           name="email">
+                </div>
+                <div class="form-group">
+                    <label for="passwrd">Пароль</label>
+                    <input type="password" class="form-control" id="passwrd" placeholder="пароль"
+                           name="passwrd">
+                </div>
+                <div class="panel-footer">
+                    <button type="submit" class="button button-large">Войти</button>
+                </div>
+                <div class="panel-footer">
+                    <a href="sign_up.html">Еще нет аккаунта?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/user/js/shared.js"></script>
+}

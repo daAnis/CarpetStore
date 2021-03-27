@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Регистрация - Ковромир";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Links {
+    <link rel="stylesheet" type="text/css" href="~/user/css/style.css">
+    <script src="~/user/js/script_sign.js"></script>
+}
+
+<div class="row justify-content-md-center no-margin">
+    <div class="col-md-auto">
+        <div class="panel-large">
+            <h1>Регистрация</h1>
+            <form action="" method="POST" name="frm" id="frm" onsubmit="return frmSubmit()">
+                <div class="row justify-content-md-center no-margin">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="email" placeholder="example@example.com"
+                                   name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="passwrd">Пароль</label>
+                            <input type="password" class="form-control" id="passwrd" placeholder="пароль"
+                                   name="passwrd">
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Фамилия</label>
+                            <input type="text" class="form-control" id="last-name" placeholder="ваша фамилия"
+                                   name="last-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="first-name">Имя</label>
+                            <input type="text" class="form-control" id="first-name" placeholder="ваше имя"
+                                   name="first-name">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="middle-name">Отчество</label>
+                            <input type="text" class="form-control" id="middle-name" placeholder="ваше отчество"
+                                   name="middle-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="+0 (000) 000-00-00"
+                                   name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Дата рождения</label>
+                            <input type="date" class="form-control" id="date" name="date" min="1960-01-01"
+                                   max="2002-12-31">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Адрес</label>
+                            <input type="text" class="form-control" id="address" placeholder="ваш адрес"
+                                   name="address">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel-footer">
+                    <button type="submit" class="button button-large">Зарегистрироваться</button>
+                </div>
+                <div class="panel-footer">
+                    <a href="sign_in.html">Уже есть аккаунт?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/user/js/shared.js"></script>
+}

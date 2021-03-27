@@ -14,5 +14,10 @@
     <Folder Include="wwwroot\user\img\" />
     <Folder Include="Views\Shared\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\Product\" />
+    <Folder Include="Views\Article\" />
+    <Folder Include="Views\SignIn\" />
+    <Folder Include="Views\SignUp\" />
+    <Folder Include="Views\Stub\" />
   </ItemGroup>
 </Project>
