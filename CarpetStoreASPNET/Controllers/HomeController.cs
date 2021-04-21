@@ -19,5 +19,15 @@ namespace CarpetStoreASPNET.Controllers
         {
             return View();
         }
+
+        public ActionResult GetCarouselItem()
+        {
+            return PartialView("_GetCarouselItem");
+        }
+
+        public ActionResult GetProduct()
+        {
+            return PartialView("_GetProduct");
+        }
     }
 }

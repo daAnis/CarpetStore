@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CarpetStoreASPNET.Controllers
 {
-    [Route("carpet")]
-    public class ProductController : Controller
+    [Route("article")]
+    public class ArticleController : Controller
     {
         // GET: /<controller>/
         [Route("index")]
