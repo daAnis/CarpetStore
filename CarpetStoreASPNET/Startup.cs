@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarpetStoreASPNET.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +17,7 @@ namespace CarpetStoreASPNET
 
         public IConfiguration configuration { get; }
 
-        public Startup (IConfiguration _configuration)
+        public Startup(IConfiguration _configuration)
         {
             configuration = _configuration;
         }
@@ -26,6 +27,9 @@ namespace CarpetStoreASPNET
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddMvc();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,21 +40,19 @@ namespace CarpetStoreASPNET
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSession();
+            app.UseMiddleware<AuthenticationMiddleware>();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                /*endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });*/
-
-                endpoints.MapControllerRoute(
+                    endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
-                    );
+                );
             });
         }
     }

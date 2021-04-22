@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h3>Admin Page</h3>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Collection</th>
+            <th>Country</th>
+            <th>ProdMethod</th>
+            <th>Material</th>
+            <th>PileHeight</th>
+            <th>Density</th>
+            <th>Shape</th>
+            <th>Pattern</th>
+            <th>Style</th>
+            <th>AmountOfColors</th>
+            <th>AmountOfInvoices</th>
+            <th>PrimaryColor</th>
+            <th>Photos</th>
+            <th>SizesAndPrices</th>
+        </tr>
+        @foreach (var product in ViewBag.products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Collection</td>
+                    <td>@product.Country</td>
+                    <td>@product.ProdMethod</td>
+                    <td>@product.Material</td>
+                    <td>@product.PileHeight</td>
+                    <td>@product.Density</td>
+                    <td>@product.Shape</td>
+                    <td>@product.Pattern</td>
+                    <td>@product.Style</td>
+                    <td>@product.AmountOfColors</td>
+                    <td>@product.AmountOfInvoices</td>
+                    <td>@product.PrimaryColor</td>
+                    <td>
+                        @foreach (var photo in product.Photos)
+                        {
+                            <img src="~/images/@photo" width="120" />
+                        }
+                    </td>
+                    <td>
+                        @foreach (var sizeAndPrice in product.SizesAndPrices)
+                        {
+                            <span>@sizeAndPrice.Key</span>
+                            <span> - </span>
+                            <span>@sizeAndPrice.Value</span>
+                        }
+                    </td>
+                </tr>
+            }
+    </table>
+</body>
+</html>
