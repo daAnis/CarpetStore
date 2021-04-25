@@ -14,14 +14,14 @@
 <body>
     <nav id="m-navbar">
         <div class="topnav">
-            <a href="stub.html">О нас</a>
-            <a href="stub.html">Контакты</a>
+            <a asp-controller="stub" asp-action="index">О нас</a>
+            <a asp-controller="stub" asp-action="index">Контакты</a>
             <div class="topnav-centered">
-                <a href="index.html">Ковромир</a>
+                <a asp-controller="home" asp-action="index">Ковромир</a>
             </div>
             <div class="topnav-right">
-                <a href="sign_in.html">Вход</a>
-                <a href="stub.html">Корзина</a>
+                <a asp-controller="signin" asp-action="index">Вход</a>
+                <a asp-controller="stub" asp-action="index">Корзина</a>
             </div>
         </div>
     </nav>

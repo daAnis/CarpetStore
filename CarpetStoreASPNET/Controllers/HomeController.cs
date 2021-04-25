@@ -14,14 +14,17 @@ namespace CarpetStoreASPNET.Controllers
     {
         private DataContext db = new DataContext();
 
-        // GET: /<controller>/
         [Route("index")]
         [Route("")]
         [Route("~/")]
         public IActionResult Index()
         {
+            var prices = db.SizesAndPrices.ToList();
+            ViewBag.MaxPrice = prices.Max(t => t.Price);
+            ViewBag.MinPrice = prices.Min(t => t.Price);
+
             ViewBag.products = db.Products.ToList();
-            ViewBag.prices = db.SizesAndPrices.ToList();
+            ViewBag.prices = prices;
             return View();
         }
     }

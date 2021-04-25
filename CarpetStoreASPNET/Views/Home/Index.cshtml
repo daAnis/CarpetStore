@@ -103,12 +103,11 @@
                         Цена
                     </div>
                     <div class="card-body">
-                        <!--Получить диапазон цен-->
-                        <span>100 000</span>
-                        <span style="float:right;">900 000</span>
+                        <span>@ViewBag.MinPrice</span>
+                        <span style="float:right;">@ViewBag.MaxPrice</span>
                         <input id="ex2" type="text" class="span2" value="" data-slider-id="ex"
-                               data-slider-min="10" data-slider-max="1000" data-slider-step="5"
-                               data-slider-value="[10,1000]" />
+                               data-slider-min="@ViewBag.MinPrice" data-slider-max="@ViewBag.MaxPrice" data-slider-step="1"
+                               data-slider-value="[@ViewBag.MinPrice,@ViewBag.MaxPrice]" />
                     </div>
                 </li>
                 <li class="card">
@@ -147,16 +146,12 @@
                         Размер
                     </div>
                     <div class="card-body">
-                        <!--Дописать foreach-->
-                        <div class="size-check">
-                            <label class="size-check-label"><input type="checkbox">120 x 80</label>
-                        </div>
-                        <div class="size-check">
-                            <label class="size-check-label"><input type="checkbox">120 x 80</label>
-                        </div>
-                        <div class="size-check">
-                            <label class="size-check-label"><input type="checkbox">120 x 80</label>
-                        </div>
+                        @foreach (var size in ViewBag.prices)
+                        {
+                            <div class="size-check">
+                                <label class="size-check-label"><input type="checkbox">@size.Size</label>
+                            </div>
+                        }
                     </div>
                 </li>
             </ul>
