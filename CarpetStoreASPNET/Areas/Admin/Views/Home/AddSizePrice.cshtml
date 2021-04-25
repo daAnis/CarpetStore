@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+
+@model CarpetStoreASPNET.Models.SizeAndPrice
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+</head>
+<body>
+
+    <h3>Adding prices</h3>
+    <form method="post" asp-controller="admin" asp-action="addPrice">
+        <table cellpadding="2" cellspacing="2">
+            <tr>
+                <td>ProductId</td>
+                <td>
+                    <input type="number" asp-for="ProductId" />
+                </td>
+            </tr>
+            <tr>
+                <td>Size</td>
+                <td>
+                    <input type="text" asp-for="Size" />
+                </td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>
+                    <input type="number" asp-for="Price" />
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" value="Save" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

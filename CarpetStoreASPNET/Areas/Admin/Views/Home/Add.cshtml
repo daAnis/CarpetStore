@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+}
+
+@model CarpetStoreASPNET.Models.Product
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+</head>
+<body>
+
+    <h3>Add product</h3>
+    <form method="post" asp-controller="admin" asp-action="add" enctype="multipart/form-data">
+        <table cellpadding="2" cellspacing="2">
+            <tr>
+                <td>Name</td>
+                <td>
+                    <input type="text" asp-for="Name" />
+                </td>
+            </tr>
+            <tr>
+                <td>FullName</td>
+                <td>
+                    <input type="text" asp-for="FullName" />
+                </td>
+            </tr>
+            <tr>
+                <td>Article</td>
+                <td>
+                    <input type="text" asp-for="Article" />
+                </td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td>
+                    <input type="text" asp-for="Description" />
+                </td>
+            </tr>
+            <tr>
+                <td>Collection</td>
+                <td>
+                    <input type="text" asp-for="Collection" />
+                </td>
+            </tr>
+            <tr>
+                <td>Country</td>
+                <td>
+                    <input type="text" asp-for="Country" />
+                </td>
+            </tr>
+            <tr>
+                <td>ProdMethod</td>
+                <td>
+                    <input type="text" asp-for="ProdMethod" />
+                </td>
+            </tr>
+            <tr>
+                <td>Material</td>
+                <td>
+                    <input type="text" asp-for="Material" />
+                </td>
+            </tr>
+            <tr>
+                <td>PileHeight</td>
+                <td>
+                    <input type="text" asp-for="PileHeight" />
+                </td>
+            </tr>
+            <tr>
+                <td>Density</td>
+                <td>
+                    <input type="text" asp-for="Density" />
+                </td>
+            </tr>
+            <tr>
+                <td>Shape</td>
+                <td>
+                    <input type="text" asp-for="Shape" />
+                </td>
+            </tr>
+            <tr>
+                <td>Pattern</td>
+                <td>
+                    <input type="text" asp-for="Pattern" />
+                </td>
+            </tr>
+            <tr>
+                <td>Style</td>
+                <td>
+                    <input type="text" asp-for="Style" />
+                </td>
+            </tr>
+            <tr>
+                <td>AmountOfColors</td>
+                <td>
+                    <input type="number" asp-for="AmountOfColors" />
+                </td>
+            </tr>
+            <tr>
+                <td>AmountOfInvoices</td>
+                <td>
+                    <input type="number" asp-for="AmountOfInvoices" />
+                </td>
+            </tr>
+            <tr>
+                <td>PrimaryColor</td>
+                <td>
+                    <input type="text" asp-for="PrimaryColor" />
+                </td>
+            </tr>
+            <tr>
+                <td>Photos</td>
+                <td>
+                    <input type="file" name="photos" multiple="multiple" />
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" value="Save" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

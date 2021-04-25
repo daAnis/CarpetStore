@@ -1,6 +1,8 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+@using System.Linq;
+@using Dynlist = System.Collections.Generic.IEnumerable<dynamic>;
 @{
     ViewBag.Title = "Ковромир";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,45 +23,41 @@
 <figure id="target">
     <div id="demo" class="carousel slide" data-ride="carousel">
         <ul class="carousel-indicators">
-            <!--Дописать foreach для количества элементов в карусели-->
-            <!--Active только для первого элемента карусели-->
             <li data-target="#demo" data-slide-to="0" class="active"></li>
-            <!--<li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>-->
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
         </ul>
         <div class="carousel-inner">
-            <!--Дописать foreach для карусели-->
-            @{await Html.RenderPartialAsync("_GetCarouselItem");}
-            <!--<div class="carousel-item active">
-        <img src="~/user/img/carpet.jpg">
-        <div class="carousel-caption">
-            <div class="inner">
-                <h1 style="color: #FFFFFF;">Новым покупателям - 20% при первом заказе</h1>
-                <hr>
-                <a href="sign_up.html">Зарегистрироваться</a>
+            <div class="carousel-item active">
+                <img src="~/user/img/carpet.jpg">
+                <div class="carousel-caption">
+                    <div class="inner">
+                        <h1 style="color: #FFFFFF;">Новым покупателям - 20% при первом заказе</h1>
+                        <hr>
+                        <a asp-controller="signup" asp-action="index">Зарегистрироваться</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="carousel-item">
-        <img src="~/user/img/carpet2.jpg">
-        <div class="carousel-caption">
-            <div class="inner">
-                <h1 style="color: #FFFFFF;">Как подобрать идеальный ковёр: 5 главных советов</h1>
-                <hr>
-                <a asp-controller="article" asp-action="index">Читать далее...</a>
+            <div class="carousel-item">
+                <img src="~/user/img/carpet2.jpg">
+                <div class="carousel-caption">
+                    <div class="inner">
+                        <h1 style="color: #FFFFFF;">Как подобрать идеальный ковёр: 5 главных советов</h1>
+                        <hr>
+                        <a asp-controller="article" asp-action="index">Читать далее...</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="carousel-item">
-        <img src="~/user/img/c4.jpg">
-        <div class="carousel-caption">
-            <div class="inner">
-                <h1 style="color: #FFFFFF;">Лидер продаж ноября - «SILVER»</h1>
-                <hr>
-                <a href="product.html">Подробнее</a>
-            </div>
-        </div>
-    </div>-->
+            <div class="carousel-item">
+                <img src="~/user/img/c4.jpg">
+                <div class="carousel-caption">
+                    <div class="inner">
+                        <h1 style="color: #FFFFFF;">Лидер продаж ноября - «SILVER»</h1>
+                        <hr>
+                        <a asp-controller="carpet" asp-action="1">Подробнее</a>
+                    </div>
+                </div>
+            </div>-->
         </div>
         <a class="carousel-control-prev" href="#demo" data-slide="prev">
             <span class="carousel-control-prev-icon"></span>
@@ -172,8 +170,34 @@
             <div id="caption"></div>
         </div>
         <div class="row" style="margin-left:0px;">
-            <!--Дописать foreach для ковров-->
-            @{await Html.RenderPartialAsync("_GetProduct");}
+            @foreach (var product in ViewBag.products)
+            {
+                <div class="col-auto store">
+                    <ul class="product">
+                        <li class="product-view"><img class="product-img" src="~/images/@product.Photos[0]"></li>
+                        <li class="product-title"><label><a asp-controller="carpet" asp-action="@product.Id">@product.Name</a></label></li>
+                        <li class="product-price">
+                            <div class="price-tooltip">
+                                @{ var min = ((Dynlist)product.SizesAndPrices).Min(t => t.Price);
+                                    var max = ((Dynlist)product.SizesAndPrices).Max(t => t.Price);}
+                                @min руб. - @max руб.
+                                <table class="price-tooltoptext">
+                                    <tbody>
+                                        @foreach (var price in product.SizesAndPrices)
+                                        {
+                                            <tr>
+                                                <td>@price.Size</td>
+                                                <td>@price.Price руб.</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            }
+
         </div>
     </div>
 </div>

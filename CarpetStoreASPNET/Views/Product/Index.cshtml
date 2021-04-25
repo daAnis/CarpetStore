@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "«SILVER» - Ковромир";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var product = ViewBag.product;
 }
 
 @section Links {
@@ -12,69 +13,63 @@
 <figure>
     <div class="slideshow-container">
         <div class="slide first">
-            <img class="slide-img" src="~/user/img/c4.jpg">
+            <img class="slide-img" src="~/images/@product.Photos[0]">
         </div>
-        <div class="slide">
-            <img class="slide-img" src="~/user/img/c5.jpg">
-        </div>
-        <div class="slide">
-            <img class="slide-img" src="~/user/img/c6.jpg">
-        </div>
+        @for (int i = 1; i < product.Photos.Count; i++)
+        {
+            <div class="slide">
+                <img class="slide-img" src="~/images/@product.Photos[i]">
+            </div>
+        }
         <a class="prev" onclick="difSlide(-1)">❮</a>
         <a class="next" onclick="difSlide(1)">❯</a>
     </div>
     <br>
     <div class="slideshow-dots">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
+        @for (int i = 1; i <= product.Photos.Count; i++)
+        {
+            <span class="dot" onclick="currentSlide(@i)"></span>
+        }
     </div>
 </figure>
 <section>
-    <h1>Ковер «SILVER» S828A-LGRAY (артикул 59196)</h1>
-    <h2>Описание ковра «SILVER»</h2>
+    <h1>Ковер «@product.Name» @product.FullName (артикул @product.Article)</h1>
+    <h2>Описание ковра «@product.Name»</h2>
     <p>
-        Изящные ковры SILVER визуально обогатят ваш интерьер.
-        Эта коллекция создана для тех, кто любит эстетичный натуральный декор и отдаёт предпочтение сдержанной
-        роскоши. Среди дизайнов холодный мрамор и винтаж. И тот, и другой на пике актуальности. Профессиональные
-        дизайнеры часто дополняют интерьеры этими узорами, чтобы создать ощущение роскошной обстановки в доме.
-        Коллекция выполнена в чистых пастельных оттенках, благодаря чему смотрится ненавязчиво и легко. Такой
-        дизайн идеально подходит, чтобы визуально освежить интерьер.
-        А плотный ворс из полиэстера делает ковры SILVER практичными, отлично приспособленными для нужд
-        современного дома: изделия не мнутся, не протираются и легко чистятся.
+        @product.Description
     </p>
-    <h2>Характеристики ковра «SILVER»</h2>
+    <h2>Характеристики ковра «@product.Name»</h2>
     <div class="row">
         <div class="col-sm">
             <table>
                 <tbody>
                     <tr>
                         <td class="t-h">Страна производства</td>
-                        <td>Турция</td>
+                        <td>@product.Country</td>
                     </tr>
                     <tr>
                         <td class="t-h">Способ производства</td>
-                        <td>Машинная работа</td>
+                        <td>@product.ProdMethod</td>
                     </tr>
                     <tr>
                         <td class="t-h">Материал</td>
-                        <td>Синтетика</td>
+                        <td>@product.Material</td>
                     </tr>
                     <tr>
                         <td class="t-h">Высота ворса</td>
-                        <td>5 мм</td>
+                        <td>@product.PileHeight</td>
                     </tr>
                     <tr>
                         <td class="t-h">Плотность</td>
-                        <td>620 000 узлов/м2</td>
+                        <td>@product.Density</td>
                     </tr>
                     <tr>
                         <td class="t-h">Форма</td>
-                        <td>Прямоугольник</td>
+                        <td>@product.Shape</td>
                     </tr>
                     <tr>
                         <td class="t-h">Узор</td>
-                        <td>Абстрактный</td>
+                        <td>@product.Pattern</td>
                     </tr>
                 </tbody>
             </table>
@@ -84,89 +79,49 @@
                 <tbody>
                     <tr>
                         <td class="t-h">Стиль</td>
-                        <td>Современные ковры</td>
+                        <td>@product.Style</td>
                     </tr>
                     <tr>
                         <td class="t-h">Коллекция</td>
-                        <td>SILVER</td>
+                        <td>@product.Collection</td>
                     </tr>
                     <tr>
                         <td class="t-h">Наименование</td>
-                        <td>S828A-LGRAY</td>
+                        <td>@product.FullName</td>
                     </tr>
                     <tr>
                         <td class="t-h">Артикул</td>
-                        <td>59196</td>
+                        <td>@product.Article</td>
                     </tr>
                     <tr>
                         <td class="t-h">Количество цветов</td>
-                        <td>8</td>
+                        <td>@product.AmountOfColors</td>
                     </tr>
                     <tr>
                         <td class="t-h">Количество фактур</td>
-                        <td>2</td>
+                        <td>@product.AmountOfInvoices</td>
                     </tr>
                     <tr>
                         <td class="t-h">Цвет</td>
-                        <td>Серый</td>
+                        <td>@product.PrimaryColor</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     <div>
-        <h2>Доступные размеры ковра «SILVER»</h2>
+        <h2>Доступные размеры ковра «@product.Name»</h2>
         <div class="row">
-            <div class="col-md-auto">
-                <ul class="price">
-                    <li class="header">1,2 x 1,7 м</li>
-                    <li>10 900 руб.</li>
-                    <li class="black"><a href="#" class="button button-inline">В корзину</a></li>
-                </ul>
-            </div>
-            <div class="col-md-auto">
-                <ul class="price">
-                    <li class="header">1,6 x 2,3 м</li>
-                    <li>19 900 руб.</li>
-                    <li class="black"><a href="#" class="button button-inline">В корзину</a></li>
-                </ul>
-            </div>
-            <div class="col-md-auto">
-                <ul class="price">
-                    <li class="header">1,6 x 3,0 м</li>
-                    <li>25 900 руб.</li>
-                    <li class="black"><a href="#" class="button button-inline">В корзину</a></li>
-                </ul>
-            </div>
-            <div class="col-md-auto">
-                <ul class="price">
-                    <li class="header">2,0 x 2,9 м</li>
-                    <li>35 900 руб.</li>
-                    <li class="black"><a href="#" class="button button-inline">В корзину</a></li>
-                </ul>
-            </div>
-
-            <div class="col-md-auto">
-                <ul class="price">
-                    <li class="header">2,4 x 3,0 м</li>
-                    <li>45 900 руб.</li>
-                    <li class="black"><a href="#" class="button button-inline">В корзину</a></li>
-                </ul>
-            </div>
-            <div class="col-md-auto">
-                <ul class="price">
-                    <li class="header">2,4 x 3,4 м</li>
-                    <li>49 900 руб.</li>
-                    <li class="black"><a href="#" class="button button-inline">В корзину</a></li>
-                </ul>
-            </div>
-            <div class="col-md-auto">
-                <ul class="price">
-                    <li class="header">3,0 x 4,0 м</li>
-                    <li>69 900 руб.</li>
-                    <li class="black"><a href="#" class="button button-inline">В корзину</a></li>
-                </ul>
-            </div>
+            @foreach (var sap in ViewBag.sizesAndPrices)
+            {
+                <div class="col-md-auto">
+                    <ul class="price">
+                        <li class="header">@sap.Size</li>
+                        <li>@sap.Price руб.</li>
+                        <li class="black"><a href="#" class="button button-inline">В корзину</a></li>
+                    </ul>
+                </div>
+            }
         </div>
     </div>
 </section>

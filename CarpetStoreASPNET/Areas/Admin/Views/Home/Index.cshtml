@@ -8,13 +8,24 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <style>
+        * {
+            font-size: 10pt;
+        }
+    </style>
 </head>
 <body>
     <h3>Admin Page</h3>
+    <a asp-controller="admin" asp-action="add">Add</a>
+    <a asp-controller="admin" asp-action="addPrice">Add Price</a>
+    <a asp-controller="admin" asp-action="delete">Delete</a>
     <table border="1">
         <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>FullName</th>
+            <th>Article</th>
+            <th>Description</th>
             <th>Collection</th>
             <th>Country</th>
             <th>ProdMethod</th>
@@ -35,6 +46,9 @@
                 <tr>
                     <td>@product.Id</td>
                     <td>@product.Name</td>
+                    <td>@product.FullName</td>
+                    <td>@product.Article</td>
+                    <td>@product.Description</td>
                     <td>@product.Collection</td>
                     <td>@product.Country</td>
                     <td>@product.ProdMethod</td>
@@ -50,15 +64,16 @@
                     <td>
                         @foreach (var photo in product.Photos)
                         {
-                            <img src="~/images/@photo" width="120" />
+                            <img src="~/images/@photo" height="15" />
                         }
                     </td>
                     <td>
                         @foreach (var sizeAndPrice in product.SizesAndPrices)
                         {
-                            <span>@sizeAndPrice.Key</span>
+                            <span>@sizeAndPrice.Size</span>
                             <span> - </span>
-                            <span>@sizeAndPrice.Value</span>
+                            <span>@sizeAndPrice.Price</span>
+                            <br />
                         }
                     </td>
                 </tr>

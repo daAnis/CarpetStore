@@ -11,6 +11,12 @@ namespace CarpetStoreASPNET.Models
 
         public string Name { get; set; }
 
+        public string FullName { get; set; }
+
+        public string Article { get; set; }
+
+        public string Description { get; set; }
+
         public string Collection { get; set; }
 
         public string Country { get; set; }
@@ -19,7 +25,7 @@ namespace CarpetStoreASPNET.Models
 
         public string Material { get; set; }
 
-        public int PileHeight { get; set; }
+        public string PileHeight { get; set; }
 
         public string Density { get; set; }
 
@@ -35,8 +41,8 @@ namespace CarpetStoreASPNET.Models
 
         public string PrimaryColor { get; set; }
 
-        public List<string> Photos { get; set; }
+        public List<string> Photos { get; set; } = new List<string>();
 
-        public Dictionary<string, int> SizesAndPrices { get; set; }
+        public List<SizeAndPrice> SizesAndPrices { get; set; } = new List<SizeAndPrice>();
     }
 }
