@@ -24,7 +24,7 @@ namespace CarpetStoreASPNET.Controllers
             ViewBag.MinPrice = prices.Min(t => t.Price);
 
             ViewBag.products = db.Products.ToList();
-            ViewBag.prices = prices;
+            ViewBag.prices = prices.OrderBy(t => t.Size);
             return View();
         }
     }

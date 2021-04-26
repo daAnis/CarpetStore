@@ -21,7 +21,7 @@
             </div>
             <div class="topnav-right">
                 <a asp-controller="signin" asp-action="index">Вход</a>
-                <a asp-controller="stub" asp-action="index">Корзина</a>
+                <a asp-controller="cart" asp-action="index">Корзина</a>
             </div>
         </div>
     </nav>
@@ -29,7 +29,7 @@
         <label id="upBtn" onclick="topFunction()">Наверх</label>
         @RenderBody()
     </main>
-    <footer>
+    <footer class="@ViewBag.FooterStyle">
         <div class="row">
             <div class="col">
                 <ul>

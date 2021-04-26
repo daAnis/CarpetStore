@@ -1,7 +1,7 @@
 ﻿@{
-    ViewBag.Title = "«SILVER» - Ковромир";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var product = ViewBag.product;
+    ViewBag.Title = "\"" + product.Name + "\" - Ковромир";
 }
 
 @section Links {
@@ -118,7 +118,8 @@
                     <ul class="price">
                         <li class="header">@sap.Size</li>
                         <li>@sap.Price руб.</li>
-                        <li class="black"><a href="#" class="button button-inline">В корзину</a></li>
+                        @{ var action = "buy/" + sap.Id.ToString() + "/";}
+                        <li class="black"><a asp-controller="cart" asp-action="buy" asp-route-id="@sap.Id" class="button button-inline">В корзину</a></li>
                     </ul>
                 </div>
             }

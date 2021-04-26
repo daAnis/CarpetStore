@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Корзина - Ковромир";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cart = ViewBag.cart;
+}
+
+@section Links {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/user/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/user/css/index_style.css">
+    <style>
+        .svg-plus {
+            background-image: url(~/user/img/patch-plus.svg);
+            width: 24px;
+            height: 24px;
+            background-position: center;
+        }
+
+        .svg-minus {
+            background-image: url(~/user/img/patch-minus.svg);
+            width: 24px;
+            height: 24px;
+            background-position: center;
+        }
+
+        .red {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: bold;
+            font-size: 16px;
+            color: #AF3A31;
+        }
+
+            .red svg:hover {
+                text-decoration: none;
+                color: initial;
+            }
+
+        .col-5 {
+            padding-left: 30px;
+        }
+
+        hr {
+            width: 800px;
+        }
+
+        input[type="text"]:focus {
+            border-color: #AF3A31;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #AF3A31;
+            outline: 0 none;
+        }
+    </style>
+}
+
+<br />
+<h1>Ваша корзина</h1>
+<br />
+<div class="row justify-content-md-center no-margin">
+    <div class="panel-large">
+        @for (int i = 0; i < cart.Count; i++)
+        {
+            <div class="row">
+                @{ i++;}
+                <label class="col-1 col-form-label">@i</label>
+                @{ i--;}
+                <div class="col-6">
+                    <ul class="product">
+                        <li class="product-view"><img class="product-img" src="~/images/@cart[i].SizeAndPrice.Product.Photos[0]"></li>
+                        <li class="product-title"><label><a asp-controller="carpet" asp-action="@cart[i].Product.Id">@cart[i].SizeAndPrice.Product.Name</a></label></li>
+                        <li class="product-title"><label>@cart[i].SizeAndPrice.Size</label></li>
+                        <li class="product-title"><label>@cart[i].SizeAndPrice.Price</label></li>
+                    </ul>
+                </div>
+                <div class="col-3">
+                    <a class="red" asp-controller="cart" asp-action="remove" asp-route-id="@cart[i].SizeAndPrice.Id">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             fill="currentColor" class="bi bi-patch-minus" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
+                            <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
+                        </svg>
+                    </a>
+                    <span>@cart[i].Quantity</span>
+                    <a class="red" asp-controller="cart" asp-action="buy" asp-route-id="@cart[i].SizeAndPrice.Id">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             fill="currentColor" class="bi bi-patch-plus" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5z" />
+                            <path d="m10.273 2.513-.921-.944.715-.698.622.637.89-.011a2.89 2.89 0 0 1 2.924 2.924l-.01.89.636.622a2.89 2.89 0 0 1 0 4.134l-.637.622.011.89a2.89 2.89 0 0 1-2.924 2.924l-.89-.01-.622.636a2.89 2.89 0 0 1-4.134 0l-.622-.637-.89.011a2.89 2.89 0 0 1-2.924-2.924l.01-.89-.636-.622a2.89 2.89 0 0 1 0-4.134l.637-.622-.011-.89a2.89 2.89 0 0 1 2.924-2.924l.89.01.622-.636a2.89 2.89 0 0 1 4.134 0l-.715.698a1.89 1.89 0 0 0-2.704 0l-.92.944-1.32-.016a1.89 1.89 0 0 0-1.911 1.912l.016 1.318-.944.921a1.89 1.89 0 0 0 0 2.704l.944.92-.016 1.32a1.89 1.89 0 0 0 1.912 1.911l1.318-.016.921.944a1.89 1.89 0 0 0 2.704 0l.92-.944 1.32.016a1.89 1.89 0 0 0 1.911-1.912l-.016-1.318.944-.921a1.89 1.89 0 0 0 0-2.704l-.944-.92.016-1.32a1.89 1.89 0 0 0-1.912-1.911l-1.318.016z" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="col-2">
+                    @{ var currentTotal = cart[i].SizeAndPrice.Price * cart[i].Quantity;}
+                    <label class="red" style="width: initial;">@currentTotal</label>
+                </div>
+            </div>
+            <hr>
+        }
+        <form class="row g-3">
+            <div class="col-auto">
+                <label for="staticEmail1" class="sr-only">Промокод</label>
+                <input type="text" readonly class="form-control-plaintext" id="staticEmail1" value="Промокод">
+            </div>
+            <div class="col-auto">
+                <input type="text" id="dis" class="form-control" placeholder="Введите ваш промокод">
+            </div>
+            <div class="col-auto">
+                <button type="submit" id="buttonDemo2" class="button button-large mb-3">Применить</button>
+            </div>
+        </form>
+        <hr>
+        <form class="row justify-content-md-center">
+            <div class="col-auto">
+                <label for="staticEmail2" class="sr-only">Итого: </label>
+                <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="@ViewBag.total">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="button button-large mb-3">Оплатить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/user/js/shared.js"></script>
+    <script src="~/user/js/script_index.js"></script>
+    <script src="~/user/js/cart.js"></script>
+}
