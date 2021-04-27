@@ -27,15 +27,28 @@ namespace CarpetStoreASPNET.Controllers
             return View("Index");
         }
 
-        [Route("discount/{dis}/{total:int}")]
-        public ContentResult Discount(string dis, decimal total)
+        [Route("amount")]
+        public ContentResult Amount()
+        {
+            var cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            if (cart == null) return Content("");
+            return Content(cart.Count().ToString());
+        }
+
+        [Route("discount/{dis}/{total}")]
+        public ContentResult Discount(string dis, string total)
         {
             if (dis.Equals("1234"))
             {
-                decimal newTotal = total * 0.2m;
-                return Content(newTotal.ToString());
+                List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+                foreach(Item item in cart)
+                {
+                    item.SizeAndPrice.Price = item.SizeAndPrice.Price - item.SizeAndPrice.Price * 0.2m;
+                }
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+                return Content(cart.Sum(item => item.SizeAndPrice.Price * item.Quantity).ToString());
             }
-            return Content(total.ToString());
+            return Content(total);
         }
 
         [Route("buy/{id:int}")]
@@ -62,7 +75,6 @@ namespace CarpetStoreASPNET.Controllers
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
             //return RedirectToAction("Index");
-            //return RedirectToRoute(new { controller = "Home", action = "Index" });
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
@@ -82,6 +94,23 @@ namespace CarpetStoreASPNET.Controllers
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             return RedirectToAction("Index");
         }
+
+        /*[Route("remove/{id}")]
+        public ContentResult Remove(string id)
+        {
+            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            int index = isExist(Convert.ToInt32(id));
+            if (cart[index].Quantity > 1)
+            {
+                cart[index].Quantity--;
+            }
+            else
+            {
+                cart.RemoveAt(index);
+            }
+            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            return Content(cart[index].Quantity.ToString());
+        }*/
 
         private int isExist(int id)
         {

@@ -5,8 +5,6 @@
 }
 
 @section Links {
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <link rel="stylesheet" type="text/css" href="~/user/css/style.css">
     <link rel="stylesheet" type="text/css" href="~/user/css/index_style.css">
     <style>
@@ -73,7 +71,7 @@
                     </ul>
                 </div>
                 <div class="col-3">
-                    <a class="red" asp-controller="cart" asp-action="remove" asp-route-id="@cart[i].SizeAndPrice.Id">
+                    <a class="red" id="minus-btn" asp-controller="cart" asp-action="remove" asp-route-id="@cart[i].SizeAndPrice.Id">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                              fill="currentColor" class="bi bi-patch-minus" viewBox="0 0 16 16">
                             <path fill-rule="evenodd"
@@ -107,7 +105,7 @@
                 <input type="text" id="dis" class="form-control" placeholder="Введите ваш промокод">
             </div>
             <div class="col-auto">
-                <button type="submit" id="buttonDemo2" class="button button-large mb-3">Применить</button>
+                <button type="button" id="buttonDemo2" class="button button-large mb-3">Применить</button>
             </div>
         </form>
         <hr>
