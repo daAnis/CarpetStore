@@ -74,7 +74,6 @@ namespace CarpetStoreASPNET.Controllers
                 }
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
-            //return RedirectToAction("Index");
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
@@ -94,23 +93,6 @@ namespace CarpetStoreASPNET.Controllers
             SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             return RedirectToAction("Index");
         }
-
-        /*[Route("remove/{id}")]
-        public ContentResult Remove(string id)
-        {
-            List<Item> cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-            int index = isExist(Convert.ToInt32(id));
-            if (cart[index].Quantity > 1)
-            {
-                cart[index].Quantity--;
-            }
-            else
-            {
-                cart.RemoveAt(index);
-            }
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-            return Content(cart[index].Quantity.ToString());
-        }*/
 
         private int isExist(int id)
         {

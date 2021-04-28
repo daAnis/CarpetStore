@@ -20,9 +20,7 @@
     <script>
 
 
-
         $(document).ready(function () {
-
             if (document.createElement("datalist").options) {
 
                 $("#productsch").on("input", function (e) {
@@ -33,22 +31,93 @@
                         dataList.empty();
                         if (res.length) {
                             for (var i = 0, len = res.length; i < len; i++) {
+                                var a = $("<a></a>").attr("href", "/carpet/" + res[i].Id);
                                 var opt = $("<option></option>").attr("value", res[i].Name);
-                                opt.attr("asp-controller", "carpet");
-                                opt.attr("asp-action", res[i].Id);
+                                opt.html(a);
                                 dataList.append(opt);
                             }
-
                         }
                     }, "json");
                 });
-
             }
 
+            $("#srchbtn").click(function () {
+                window.location = $("#searchRes option[value='" + $("[list='searchRes']").val() + "']").find("a").attr("href");
+            });
+
+           
+
+            $(".my-circle").change(function () {
+                var myColor = $(this).css('background-color');
+                var red = $('#red').css('background-color');
+                var color;
+                if (red === myColor) color = 'red';
+                switch (myColor) {
+                    case $('#red').css('background-color'):
+                        color = 'red';
+                        break;
+                    case $('#orange').css('background-color'):
+                        color = 'orange';
+                        break;
+                    case $('#yellow').css('background-color'):
+                        color = 'yellow';
+                        break;
+                    case $('#green').css('background-color'):
+                        color = 'green';
+                        break;
+                    case $('#cyan').css('background-color'):
+                        color = 'cyan';
+                        break;
+                    case $('#blue').css('background-color'):
+                        color = 'blue';
+                        break;
+                    case $('#purple').css('background-color'):
+                        color = 'purple';
+                        break;
+                    case $('#black').css('background-color'):
+                        color = 'black';
+                        break;
+                    case $('#grey').css('background-color'):
+                        color = 'grey';
+                        break;
+                    case $('#white').css('background-color'):
+                        color = 'white';
+                        break;
+                }
+                $.ajax({
+                    url: 'home/filter/color/' + color,
+                    type: 'GET',
+                    success: function () {
+                        location.reload(true);
+                    }
+                });
+            });
         });
+
 
     </script>
 }
+
+<div id="red" style="display:none; background-color:red;"></div>
+<div id="orange" style="        display: none;
+        background-color: orange;"></div>
+<div id="yellow" style="        display: none;
+        background-color: yellow;"></div>
+<div id="green" style="        display: none;
+        background-color: green;"></div>
+<div id="cyan" style="        display: none;
+        background-color: cyan;"></div>
+<div id="blue" style="        display: none;
+        background-color: blue;"></div>
+<div id="purple" style="        display: none;
+        background-color: purple;"></div>
+<div id="black" style="        display: none;
+        background-color: black;"></div>
+<div id="grey" style="        display: none;
+        background-color: grey;"></div>
+<div id="white" style="        display: none;
+        background-color: white;"></div>
+
 
 <figure id="target">
     <div id="demo" class="carousel slide" data-ride="carousel">
@@ -120,7 +189,7 @@
                             <div class="input-group">
                                 <input type="text" id="productsch" class="form-control" list="searchRes" placeholder="Введите название" autocomplete="off">
                                 <div class="input-group-btn search-btn">
-                                    <button class="btn btn-default no-padding" type="button">
+                                    <button id="srchbtn" class="btn btn-default no-padding" type="button">
                                         <div class="svg-image"></div>
                                     </button>
                                 </div>
@@ -204,12 +273,13 @@
                         <li class="product-title"><label><a asp-controller="carpet" asp-action="@product.Id">@product.Name</a></label></li>
                         <li class="product-price">
                             <div class="price-tooltip">
-                                @{ var min = ((Dynlist)product.SizesAndPrices).Min(t => t.Price);
-                                    var max = ((Dynlist)product.SizesAndPrices).Max(t => t.Price);}
+                                @{var productPrices = ((Dynlist)ViewBag.prices).Where(t => (t.ProductId == product.Id));
+                                    var min = ((Dynlist)productPrices).Min(t => t.Price);
+                                    var max = ((Dynlist)productPrices).Max(t => t.Price);}
                                 @min руб. - @max руб.
                                 <table class="price-tooltoptext">
                                     <tbody>
-                                        @foreach (var price in product.SizesAndPrices)
+                                        @foreach (var price in productPrices)
                                         {
                                             <tr>
                                                 <td>@price.Size</td>
