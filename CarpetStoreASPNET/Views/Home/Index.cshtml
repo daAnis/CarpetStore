@@ -16,6 +16,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css" integrity="sha512-3q8fi8M0VS+X/3n64Ndpp6Bit7oXSiyCnzmlx6IDBLGlY5euFySyJ46RUlqIVs0DPCGOypqP8IRk/EyPvU28mQ==" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="~/user/css/style.css">
     <link rel="stylesheet" type="text/css" href="~/user/css/index_style.css">
+
+    <script>
+
+
+
+        $(document).ready(function () {
+
+            if (document.createElement("datalist").options) {
+
+                $("#productsch").on("input", function (e) {
+                    var val = $(this).val();
+                    if (val === "") return;
+                    $.get("/api/product/search", { term: val }, function (res) {
+                        var dataList = $("#searchRes");
+                        dataList.empty();
+                        if (res.length) {
+                            for (var i = 0, len = res.length; i < len; i++) {
+                                var opt = $("<option></option>").attr("value", res[i].Name);
+                                opt.attr("asp-controller", "carpet");
+                                opt.attr("asp-action", res[i].Id);
+                                dataList.append(opt);
+                            }
+
+                        }
+                    }, "json");
+                });
+
+            }
+
+        });
+
+    </script>
 }
 
 <figure id="target">
@@ -86,12 +118,13 @@
                     <div class="card-body">
                         <form>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Введите название">
+                                <input type="text" id="productsch" class="form-control" list="searchRes" placeholder="Введите название" autocomplete="off">
                                 <div class="input-group-btn search-btn">
-                                    <button class="btn btn-default no-padding" type="submit">
+                                    <button class="btn btn-default no-padding" type="button">
                                         <div class="svg-image"></div>
                                     </button>
                                 </div>
+                                <datalist id="searchRes"></datalist>
                             </div>
                         </form>
                     </div>

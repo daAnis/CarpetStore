@@ -9,15 +9,3 @@
         }
     });
 });
-
-
-/*$('#minus-btn').click(function () {
-    var q = $('#quant').val();
-    $ajax({
-        type: 'GET',
-        url: 'cart/remove/' + q,
-        success: function (result) {
-            $('#quant').val(result);
-        }
-    });
-});*/
