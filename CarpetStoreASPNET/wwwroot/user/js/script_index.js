@@ -34,7 +34,6 @@ span.onclick = function () {
     modal.style.display = "none";
 }
 
-//Инициализация слайдера
 var slider = new Slider('#ex2', {});
 
 //Рамка у выбранного размера

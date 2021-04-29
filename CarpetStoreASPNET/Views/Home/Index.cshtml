@@ -45,6 +45,27 @@
                 window.location = $("#searchRes option[value='" + $("[list='searchRes']").val() + "']").find("a").attr("href");
             });
 
+            $("#ex2").change(function () {
+                $.ajax({
+                    url: 'home/filter/price',
+                    data: $("#ex2").slider('getValue'),
+                    type: 'GET',
+                    success: function () {
+                        location.reload(true);
+                    }
+                });
+            });
+
+            $(".size").change(function () {
+                var size = $(this)[0].nextSibling.textContent;
+                $.ajax({
+                    url: 'home/filter/size/' + size,
+                    type: 'GET',
+                    success: function () {
+                        location.reload(true);
+                    }
+                });
+            });
            
 
             $(".my-circle").change(function () {
@@ -206,7 +227,7 @@
                         <span>@ViewBag.MinPrice</span>
                         <span style="float:right;">@ViewBag.MaxPrice</span>
                         <input id="ex2" type="text" class="span2" value="" data-slider-id="ex"
-                               data-slider-min="@ViewBag.MinPrice" data-slider-max="@ViewBag.MaxPrice" data-slider-step="1"
+                               data-slider-min="@ViewBag.MinPriceNow" data-slider-max="@ViewBag.MaxPriceNow" data-slider-step="1"
                                data-slider-value="[@ViewBag.MinPrice,@ViewBag.MaxPrice]" />
                     </div>
                 </li>
@@ -249,7 +270,7 @@
                         @foreach (var size in ViewBag.prices)
                         {
                             <div class="size-check">
-                                <label class="size-check-label"><input type="checkbox">@size.Size</label>
+                                <label class="size-check-label"><input type="checkbox" class="size">@size.Size</label>
                             </div>
                         }
                     </div>

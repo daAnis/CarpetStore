@@ -22,6 +22,7 @@ namespace CarpetStoreASPNET.Controllers
             try
             {
                 string term = HttpContext.Request.Query["term"].ToString();
+                term = term.ToUpper();
                 var names = db.Products.Where(p => p.Name.Contains(term)).Select(p => p.Name).ToList();
                 var products = db.Products.Where(p => p.Name.Contains(term)).ToList();
 
