@@ -21,6 +21,7 @@ namespace CarpetStoreASPNET.Controllers
         public IActionResult Index()
         {
             List<Product> products;
+            
             if (SessionHelper.GetObjectFromJson<List<Product>>(HttpContext.Session, "products") == null)
             {
                 products = db.Products.ToList();
@@ -32,10 +33,27 @@ namespace CarpetStoreASPNET.Controllers
             var prices = db.SizesAndPrices.ToList();
             var pricesInRange = prices.Where(p => products.Any(c => c.Id == p.ProductId)).ToList();
 
-            ViewBag.MaxPrice = prices.Max(t => t.Price);
-            ViewBag.MaxPriceNow = pricesInRange.Max(t => t.Price);
-            ViewBag.MinPrice = prices.Min(t => t.Price);
-            ViewBag.MinPriceNow = pricesInRange.Min(t => t.Price);
+            if (prices.Count > 0)
+            {
+                ViewBag.MaxPrice = prices.Max(t => t.Price);
+                ViewBag.MinPrice = prices.Min(t => t.Price);
+            }
+            else
+            {
+                ViewBag.MaxPrice = 0;
+                ViewBag.MinPrice = 0;
+            }
+
+            if (pricesInRange.Count > 0)
+            {
+                ViewBag.MaxPriceNow = pricesInRange.Max(t => t.Price);
+                ViewBag.MinPriceNow = pricesInRange.Min(t => t.Price);
+            }
+            else
+            {
+                ViewBag.MaxPriceNow = 0;
+                ViewBag.MinPriceNow = 0;
+            }
 
             ViewBag.products = products;
             ViewBag.prices = prices.OrderBy(t => t.Size);
@@ -214,7 +232,7 @@ namespace CarpetStoreASPNET.Controllers
         {
             var sessionSet = SessionHelper.GetObjectFromJson<List<Product>>(HttpContext.Session, "products");
             var filteredSet = sessionSet.Intersect(products, new ProductComparer()).ToList();
-           if (filteredSet.Count == 0)
+            if (filteredSet.Count == 0)
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "products", db.Products.ToList());
             else
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "products", filteredSet);
